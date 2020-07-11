@@ -1,0 +1,13 @@
+C:\Users\peter\Source\Repos\LogFileManagement\bin\Debug\netcoreapp3.1\LogFileManagement.exe
+C:\Users\peter\Source\Repos\LogFileManagement\bin\Debug\netcoreapp3.1\LogFileManagement.deps.json
+C:\Users\peter\Source\Repos\LogFileManagement\bin\Debug\netcoreapp3.1\LogFileManagement.runtimeconfig.json
+C:\Users\peter\Source\Repos\LogFileManagement\bin\Debug\netcoreapp3.1\LogFileManagement.runtimeconfig.dev.json
+C:\Users\peter\Source\Repos\LogFileManagement\bin\Debug\netcoreapp3.1\LogFileManagement.dll
+C:\Users\peter\Source\Repos\LogFileManagement\bin\Debug\netcoreapp3.1\LogFileManagement.pdb
+C:\Users\peter\Source\Repos\LogFileManagement\obj\Debug\netcoreapp3.1\LogFileManagement.csprojAssemblyReference.cache
+C:\Users\peter\Source\Repos\LogFileManagement\obj\Debug\netcoreapp3.1\LogFileManagement.AssemblyInfoInputs.cache
+C:\Users\peter\Source\Repos\LogFileManagement\obj\Debug\netcoreapp3.1\LogFileManagement.AssemblyInfo.cs
+C:\Users\peter\Source\Repos\LogFileManagement\obj\Debug\netcoreapp3.1\LogFileManagement.csproj.CoreCompileInputs.cache
+C:\Users\peter\Source\Repos\LogFileManagement\obj\Debug\netcoreapp3.1\LogFileManagement.dll
+C:\Users\peter\Source\Repos\LogFileManagement\obj\Debug\netcoreapp3.1\LogFileManagement.pdb
+C:\Users\peter\Source\Repos\LogFileManagement\obj\Debug\netcoreapp3.1\LogFileManagement.genruntimeconfig.cache
