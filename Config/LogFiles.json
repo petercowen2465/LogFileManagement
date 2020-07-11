@@ -1,0 +1,12 @@
+[
+  {
+    "Folder": "C:\\code\\logs",
+    "FilePattern": "*.txt",
+    "RetentionPeriodDays": "2"
+  },
+  {
+    "Folder": "C:\\code\\logs",
+    "FilePattern": "*.jpg",
+    "RetentionPeriodDays": "3"
+  }
+]
