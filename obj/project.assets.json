@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\peter\\Source\\Repos\\LogFileManagement\\LogFileManagement.csproj",
+      "projectUniqueName": "C:\\Users\\peter\\Source\\Repos\\LogFileManagement\\LogFileManagement\\LogFileManagement.csproj",
       "projectName": "LogFileManagement",
-      "projectPath": "C:\\Users\\peter\\Source\\Repos\\LogFileManagement\\LogFileManagement.csproj",
+      "projectPath": "C:\\Users\\peter\\Source\\Repos\\LogFileManagement\\LogFileManagement\\LogFileManagement.csproj",
       "packagesPath": "C:\\Users\\peter\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\peter\\Source\\Repos\\LogFileManagement\\obj\\",
+      "outputPath": "C:\\Users\\peter\\Source\\Repos\\LogFileManagement\\LogFileManagement\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\peter\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fSllmC2/KL2aUqePHFQE0PTxeL2NLmYzihBwRpv9DaDEGJoFbVI+dqQ90qiDUymm9r2YSpGHt0kUz9jkGIOwGA==",
+  "dgSpecHash": "7VBgHyjufvJS3c7NbOJH7q0UF3ke6FRU9HrjfxnXZUk191OjSyzrHWMT44MRG8wAFlktczH1s2BxoET7WTn6rA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\peter\\Source\\Repos\\LogFileManagement\\LogFileManagement.csproj",
+  "projectFilePath": "C:\\Users\\peter\\Source\\Repos\\LogFileManagement\\LogFileManagement\\LogFileManagement.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
