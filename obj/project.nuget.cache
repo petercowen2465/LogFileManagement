@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "UnCbtJ3743brMT3S+63AHpE5K4MlG9WITGNTSk5tMzSYUfnLCSuZ6bF0X+jFhbT19uW5IY9+4zywaebqynkL5A==",
+  "dgSpecHash": "wlap8emq0FN07ewLU3LMXPLLazA0QJ9W7/FbLNX/FAuYxFOxrgJBZ+kmRvNVjb4nmRLMKs5qRW0joA/rPaKqXA==",
   "success": true,
   "projectFilePath": "C:\\Users\\peter\\Source\\Repos\\LogFileManagement\\LogFileManagement\\LogFileManagement.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\peter\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\peter\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\peter\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\peter\\.nuget\\packages\\system.configuration.configurationmanager\\4.7.0\\system.configuration.configurationmanager.4.7.0.nupkg.sha512",
     "C:\\Users\\peter\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
     "C:\\Users\\peter\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",

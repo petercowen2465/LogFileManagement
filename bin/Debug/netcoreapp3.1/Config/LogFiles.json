@@ -2,11 +2,11 @@
   {
     "Folder": "C:\\code\\logs",
     "FilePattern": "*.txt",
-    "RetentionPeriodDays": "2"
+    "RetentionPeriodDays": "0"
   },
   {
     "Folder": "C:\\code\\logs",
-    "FilePattern": "*.jpg",
-    "RetentionPeriodDays": "3"
+    "FilePattern": "*.txt",
+    "RetentionPeriodDays": "30"
   }
 ]
