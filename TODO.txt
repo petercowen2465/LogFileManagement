@@ -1,0 +1,13 @@
+TODO
+
+JSON file for folder,filePattern,retentionPeriodDays
+App COnfig - path name to JSON file
+
+Read JSON file
+loop through array
+get files from folder where now-created date > retentionPeriodDays
+
+delete files
+
+
+deploy via octopusCloud
