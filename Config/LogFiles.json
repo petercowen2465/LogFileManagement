@@ -7,6 +7,6 @@
   {
     "Folder": "C:\\code\\logs",
     "FilePattern": "*.txt",
-    "RetentionPeriodDays": "30"
+    "RetentionPeriodDays": "30a"
   }
 ]

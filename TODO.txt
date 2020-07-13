@@ -1,13 +1,17 @@
 TODO
 
 JSON file for folder,filePattern,retentionPeriodDays
-App COnfig - path name to JSON file
+XML file for folder,filePattern,retentionPeriodDays
+App COnfig - path name to JSON/XML file
 
 Read JSON file
+
+Read XML file
 loop through array
 get files from folder where now-created date > retentionPeriodDays
 
 delete files
 
+sign with codesign
 
 deploy via octopusCloud

@@ -30,9 +30,20 @@ namespace LogFileManagement
 
             foreach (var logFile in logFileArray)
             {
-                string folder = logFile["Folder"].Value<string>();
-                string filePattern = logFile["FilePattern"].Value<string>();
-                int retentionPeriodDays = logFile["RetentionPeriodDays"].Value<int>();
+                string folder;
+                string filePattern;
+                int retentionPeriodDays;
+                try
+                {
+                    folder = logFile["Folder"].Value<string>();
+                    filePattern = logFile["FilePattern"].Value<string>();
+                    retentionPeriodDays = logFile["RetentionPeriodDays"].Value<int>();
+                } catch
+                {
+                    Console.WriteLine("Failed to parse configuration details =>\n{0}", logFile.ToString());
+                    continue;
+                }
+               
 
                 ManageFolderRetention(folder, filePattern, retentionPeriodDays);
             }

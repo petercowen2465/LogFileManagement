@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Config"
   ],
-  "SelectedNode": "\\LogFileManagement.sln",
+  "SelectedNode": "\\Config\\LogFiles.json",
   "PreviewInSolutionExplorer": false
 }
