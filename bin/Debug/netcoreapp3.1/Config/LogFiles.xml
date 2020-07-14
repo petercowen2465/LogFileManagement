@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LogFiles>
+  <LogFile Folder="C:\code\logs" FilePattern="*.txt" RetentionPeriodDays="10"/>
+  <LogFile Folder="C:\code\logs" FilePattern="*.txt" RetentionPeriodDays="10a"/>
+</LogFiles>

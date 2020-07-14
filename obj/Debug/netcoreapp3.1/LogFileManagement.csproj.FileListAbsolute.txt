@@ -67,3 +67,4 @@ C:\Users\Peterco\Source\Repos\petercowenTrailhead\LogFileManagement\obj\Debug\ne
 C:\Users\Peterco\Source\Repos\petercowenTrailhead\LogFileManagement\obj\Debug\netcoreapp3.1\LogFileManagement.dll
 C:\Users\Peterco\Source\Repos\petercowenTrailhead\LogFileManagement\obj\Debug\netcoreapp3.1\LogFileManagement.pdb
 C:\Users\Peterco\Source\Repos\petercowenTrailhead\LogFileManagement\obj\Debug\netcoreapp3.1\LogFileManagement.genruntimeconfig.cache
+C:\Users\peter\Source\Repos\LogFileManagement\LogFileManagement\bin\Debug\netcoreapp3.1\Config\LogFiles.xml
