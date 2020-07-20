@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Peterco\\Source\\Repos\\petercowenTrailhead\\LogFileManagement\\LogFileManagement.csproj": {}
+    "C:\\Users\\peter\\Source\\Repos\\LogFileManagement\\LogFileManagement\\LogFileManagement.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Peterco\\Source\\Repos\\petercowenTrailhead\\LogFileManagement\\LogFileManagement.csproj": {
+    "C:\\Users\\peter\\Source\\Repos\\LogFileManagement\\LogFileManagement\\LogFileManagement.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Peterco\\Source\\Repos\\petercowenTrailhead\\LogFileManagement\\LogFileManagement.csproj",
+        "projectUniqueName": "C:\\Users\\peter\\Source\\Repos\\LogFileManagement\\LogFileManagement\\LogFileManagement.csproj",
         "projectName": "LogFileManagement",
-        "projectPath": "C:\\Users\\Peterco\\Source\\Repos\\petercowenTrailhead\\LogFileManagement\\LogFileManagement.csproj",
-        "packagesPath": "C:\\Users\\Peterco\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Peterco\\Source\\Repos\\petercowenTrailhead\\LogFileManagement\\obj\\",
+        "projectPath": "C:\\Users\\peter\\Source\\Repos\\LogFileManagement\\LogFileManagement\\LogFileManagement.csproj",
+        "packagesPath": "C:\\Users\\peter\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\peter\\Source\\Repos\\LogFileManagement\\LogFileManagement\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Peterco\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\peter\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
