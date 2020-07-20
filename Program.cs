@@ -4,6 +4,8 @@ namespace LogFileManagement
 {
     using System.Configuration;
     using System.IO;
+    using System.Linq;
+    using System.Security.AccessControl;
     using System.Xml.Linq;
     using Newtonsoft.Json.Linq;
 
@@ -11,7 +13,8 @@ namespace LogFileManagement
     {
         static void Main(string[] args)
         {
-            PurgeLogFiles();
+            //PurgeLogFiles();
+            CheckFolderAccess();
 
         }
         enum ConfigFileType
@@ -54,13 +57,16 @@ namespace LogFileManagement
             }
             return ConfigFileType.unknown;
         }
+
+        private static string LogFoldersConfigItem = "LogFolders";
         private static void PurgeLogFiles()
         {
             string fileName = "";
             ConfigFileType fileType;
 
-            fileType = GetConfig("LogFiles", ref fileName);
-            switch(fileType) {
+            fileType = GetConfig(LogFoldersConfigItem, ref fileName);
+            switch (fileType)
+            {
                 case ConfigFileType.xml:
                     PurgeLogFilesXMLConfig(fileName);
                     break;
@@ -68,7 +74,7 @@ namespace LogFileManagement
                     PurgeLogFilesJSONConfig(fileName);
                     break;
                 default:
-                    Console.WriteLine("AppSettings.{0} fileName={1} fileType={2}", "LogFile", fileName, fileType);
+                    Console.WriteLine("AppSettings.{0} fileName={1} fileType={2}", LogFoldersConfigItem, fileName, fileType);
                     break;
             }
 
@@ -86,7 +92,8 @@ namespace LogFileManagement
                     folder = logFile["Folder"].Value<string>();
                     filePattern = logFile["FilePattern"].Value<string>();
                     retentionPeriodDays = logFile["RetentionPeriodDays"].Value<int>();
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     Console.WriteLine("Failed to parse App.Config line {0}: {1}", logFile.ToString(), ex.Message);
                     continue;
@@ -138,6 +145,83 @@ namespace LogFileManagement
                 }
 
             }
+        }
+
+        private static string EFSFoldersConfigItem = "EFSFolders";
+        private static void CheckFolderAccess()
+        {
+            string fileName = "";
+            ConfigFileType fileType;
+
+            fileType = GetConfig(EFSFoldersConfigItem, ref fileName);
+            switch (fileType)
+            {
+                case ConfigFileType.xml:
+                    CheckFolderAccessXMLConfig(fileName);
+                    break;
+                case ConfigFileType.json:
+                    CheckFolderAccessJSONConfig(fileName);
+                    break;
+                default:
+                    Console.WriteLine("AppSettings.{0} fileName={1} fileType={2}", EFSFoldersConfigItem, fileName, fileType);
+                    break;
+            }
+
+        }
+
+        private static void CheckFolderAccessJSONConfig(string fileName)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void CheckFolderAccessXMLConfig(string fileName)
+        {
+            var xml = XDocument.Load(fileName);
+
+            foreach (XElement xe in xml.Descendants("EFSFolder"))
+            {
+                string folder;
+
+                try
+                {
+                    folder = xe.Attribute("Folder").Value;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unable to parse App.config line {0}:{1}",
+                        xe.ToString(), ex.Message);
+                    continue;
+                }
+
+                CheckFolderAccess(folder, xe);
+            }
+        }
+
+        private static void CheckFolderAccess(string folder, XElement xe)
+        {
+            if (Directory.Exists(folder) == false)
+            {
+                Console.WriteLine("EFS folder {0} does not exist", folder);
+            }
+            else
+            {
+                DirectoryInfo dInfo = new DirectoryInfo(folder);
+                DirectorySecurity dSecurity = dInfo.GetAccessControl();
+
+                foreach (FileSystemAccessRule rule in dSecurity.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount)))
+                {
+                    bool allowed = xe.Elements("NTAccount")
+                        .Where(x => x.Value.Equals(rule.IdentityReference.ToString(), StringComparison.CurrentCultureIgnoreCase))
+                        .Any();
+                    if (allowed == false)
+                    {
+                        Console.WriteLine("NTAccount {0} not in configured set for {1}",
+                            rule.IdentityReference.ToString(),
+                            folder);
+                    }
+                }
+            }
+
         }
     }
 }
