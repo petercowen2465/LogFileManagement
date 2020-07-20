@@ -11,40 +11,69 @@ namespace LogFileManagement
     {
         static void Main(string[] args)
         {
+            PurgeLogFiles();
 
-            string fileName = ConfigurationManager.AppSettings["LogFiles"];
+        }
+        enum ConfigFileType
+        {
+            xml,
+            json,
+            notdefined,
+            notexists,
+            unknown
+        }
+        private static ConfigFileType GetConfig(string configItem, ref string fileName)
+        {
+            fileName = ConfigurationManager.AppSettings[configItem];
 
             if (fileName is null)
             {
-                Console.WriteLine("LogFiles is not configured in AppSettings");
-                System.Environment.Exit(-1);
+                Console.WriteLine("{0} is not configured in AppSettings", configItem);
+                fileName = "not configured";
+                return ConfigFileType.notdefined;
             }
 
             if (File.Exists(fileName) == false)
             {
-                Console.WriteLine("AppSettings.LogFiles {0} does not exist", fileName);
-                System.Environment.Exit(-1);
+                Console.WriteLine("AppSettings.{0} {1} does not exist", configItem, fileName);
+                return ConfigFileType.notexists;
             }
 
             string fileExtension = Path.GetExtension(fileName);
             if (String.Equals(fileExtension, ".json", StringComparison.OrdinalIgnoreCase))
             {
-                ProcessJSONConfig(fileName);
+                return ConfigFileType.json;
             }
             else if (String.Equals(fileExtension, ".xml", StringComparison.OrdinalIgnoreCase))
             {
-                ProcessXMLConfig(fileName);
+                return ConfigFileType.xml;
             }
             else
             {
                 Console.WriteLine("AppSettings.LogFiles {0} unknown file type", fileName);
-                System.Environment.Exit(-1);
+            }
+            return ConfigFileType.unknown;
+        }
+        private static void PurgeLogFiles()
+        {
+            string fileName = "";
+            ConfigFileType fileType;
+
+            fileType = GetConfig("LogFiles", ref fileName);
+            switch(fileType) {
+                case ConfigFileType.xml:
+                    PurgeLogFilesXMLConfig(fileName);
+                    break;
+                case ConfigFileType.json:
+                    PurgeLogFilesJSONConfig(fileName);
+                    break;
+                default:
+                    Console.WriteLine("AppSettings.{0} fileName={1} fileType={2}", "LogFile", fileName, fileType);
+                    break;
             }
 
-
         }
-
-        private static void ProcessJSONConfig(string fileName)
+        private static void PurgeLogFilesJSONConfig(string fileName)
         {
             JArray logFileArray = JArray.Parse(File.ReadAllText(fileName));
             string folder;
@@ -65,8 +94,7 @@ namespace LogFileManagement
                 ManageFolderRetention(folder, filePattern, retentionPeriodDays);
             }
         }
-
-        private static void ProcessXMLConfig(string fileName)
+        private static void PurgeLogFilesXMLConfig(string fileName)
         {
             var xml = XDocument.Load(fileName);
 
