@@ -4,6 +4,8 @@ namespace LogFileManagement
 {
     using System.Configuration;
     using System.IO;
+    using System.Linq;
+    using System.Security.AccessControl;
     using System.Xml.Linq;
     using Newtonsoft.Json.Linq;
 
@@ -11,40 +13,73 @@ namespace LogFileManagement
     {
         static void Main(string[] args)
         {
+            //PurgeLogFiles();
+            CheckFolderAccess();
 
-            string fileName = ConfigurationManager.AppSettings["LogFiles"];
+        }
+        enum ConfigFileType
+        {
+            xml,
+            json,
+            notdefined,
+            notexists,
+            unknown
+        }
+        private static ConfigFileType GetConfig(string configItem, ref string fileName)
+        {
+            fileName = ConfigurationManager.AppSettings[configItem];
 
             if (fileName is null)
             {
-                Console.WriteLine("LogFiles is not configured in AppSettings");
-                System.Environment.Exit(-1);
+                Console.WriteLine("{0} is not configured in AppSettings", configItem);
+                fileName = "not configured";
+                return ConfigFileType.notdefined;
             }
 
             if (File.Exists(fileName) == false)
             {
-                Console.WriteLine("AppSettings.LogFiles {0} does not exist", fileName);
-                System.Environment.Exit(-1);
+                Console.WriteLine("AppSettings.{0} {1} does not exist", configItem, fileName);
+                return ConfigFileType.notexists;
             }
 
             string fileExtension = Path.GetExtension(fileName);
             if (String.Equals(fileExtension, ".json", StringComparison.OrdinalIgnoreCase))
             {
-                ProcessJSONConfig(fileName);
+                return ConfigFileType.json;
             }
             else if (String.Equals(fileExtension, ".xml", StringComparison.OrdinalIgnoreCase))
             {
-                ProcessXMLConfig(fileName);
+                return ConfigFileType.xml;
             }
             else
             {
                 Console.WriteLine("AppSettings.LogFiles {0} unknown file type", fileName);
-                System.Environment.Exit(-1);
             }
-
-
+            return ConfigFileType.unknown;
         }
 
-        private static void ProcessJSONConfig(string fileName)
+        private static string LogFoldersConfigItem = "LogFolders";
+        private static void PurgeLogFiles()
+        {
+            string fileName = "";
+            ConfigFileType fileType;
+
+            fileType = GetConfig(LogFoldersConfigItem, ref fileName);
+            switch (fileType)
+            {
+                case ConfigFileType.xml:
+                    PurgeLogFilesXMLConfig(fileName);
+                    break;
+                case ConfigFileType.json:
+                    PurgeLogFilesJSONConfig(fileName);
+                    break;
+                default:
+                    Console.WriteLine("AppSettings.{0} fileName={1} fileType={2}", LogFoldersConfigItem, fileName, fileType);
+                    break;
+            }
+
+        }
+        private static void PurgeLogFilesJSONConfig(string fileName)
         {
             JArray logFileArray = JArray.Parse(File.ReadAllText(fileName));
             string folder;
@@ -57,7 +92,8 @@ namespace LogFileManagement
                     folder = logFile["Folder"].Value<string>();
                     filePattern = logFile["FilePattern"].Value<string>();
                     retentionPeriodDays = logFile["RetentionPeriodDays"].Value<int>();
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     Console.WriteLine("Failed to parse App.Config line {0}: {1}", logFile.ToString(), ex.Message);
                     continue;
@@ -65,8 +101,7 @@ namespace LogFileManagement
                 ManageFolderRetention(folder, filePattern, retentionPeriodDays);
             }
         }
-
-        private static void ProcessXMLConfig(string fileName)
+        private static void PurgeLogFilesXMLConfig(string fileName)
         {
             var xml = XDocument.Load(fileName);
 
@@ -110,6 +145,83 @@ namespace LogFileManagement
                 }
 
             }
+        }
+
+        private static string EFSFoldersConfigItem = "EFSFolders";
+        private static void CheckFolderAccess()
+        {
+            string fileName = "";
+            ConfigFileType fileType;
+
+            fileType = GetConfig(EFSFoldersConfigItem, ref fileName);
+            switch (fileType)
+            {
+                case ConfigFileType.xml:
+                    CheckFolderAccessXMLConfig(fileName);
+                    break;
+                case ConfigFileType.json:
+                    CheckFolderAccessJSONConfig(fileName);
+                    break;
+                default:
+                    Console.WriteLine("AppSettings.{0} fileName={1} fileType={2}", EFSFoldersConfigItem, fileName, fileType);
+                    break;
+            }
+
+        }
+
+        private static void CheckFolderAccessJSONConfig(string fileName)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void CheckFolderAccessXMLConfig(string fileName)
+        {
+            var xml = XDocument.Load(fileName);
+
+            foreach (XElement xe in xml.Descendants("EFSFolder"))
+            {
+                string folder;
+
+                try
+                {
+                    folder = xe.Attribute("Folder").Value;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unable to parse App.config line {0}:{1}",
+                        xe.ToString(), ex.Message);
+                    continue;
+                }
+
+                CheckFolderAccess(folder, xe);
+            }
+        }
+
+        private static void CheckFolderAccess(string folder, XElement xe)
+        {
+            if (Directory.Exists(folder) == false)
+            {
+                Console.WriteLine("EFS folder {0} does not exist", folder);
+            }
+            else
+            {
+                DirectoryInfo dInfo = new DirectoryInfo(folder);
+                DirectorySecurity dSecurity = dInfo.GetAccessControl();
+
+                foreach (FileSystemAccessRule rule in dSecurity.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount)))
+                {
+                    bool allowed = xe.Elements("NTAccount")
+                        .Where(x => x.Value.Equals(rule.IdentityReference.ToString(), StringComparison.CurrentCultureIgnoreCase))
+                        .Any();
+                    if (allowed == false)
+                    {
+                        Console.WriteLine("NTAccount {0} not in configured set for {1}",
+                            rule.IdentityReference.ToString(),
+                            folder);
+                    }
+                }
+            }
+
         }
     }
 }

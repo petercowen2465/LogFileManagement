@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<EFSFolders>
+	<EFSFolder Folder="C:\code\efs">
+		<NTAccount>CIG\PeterCo</NTAccount>
+		<NTAccount>BUILTIN\Administrators</NTAccount>
+		<NTAccount>NT AUTHORITY\SYSTEM</NTAccount>
+		<NTAccount>BUILTIN\Users</NTAccount>
+		<NTAccount>NT AUTHORITY\Authenticated Users</NTAccount>
+	</EFSFolder>
+</EFSFolders>

@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\peter\\Source\\Repos\\LogFileManagement\\LogFileManagement\\LogFileManagement.csproj": {}
+    "C:\\Users\\Peterco\\Source\\Repos\\petercowenTrailhead\\LogFileManagement\\LogFileManagement.csproj": {}
   },
   "projects": {
-    "C:\\Users\\peter\\Source\\Repos\\LogFileManagement\\LogFileManagement\\LogFileManagement.csproj": {
+    "C:\\Users\\Peterco\\Source\\Repos\\petercowenTrailhead\\LogFileManagement\\LogFileManagement.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\peter\\Source\\Repos\\LogFileManagement\\LogFileManagement\\LogFileManagement.csproj",
+        "projectUniqueName": "C:\\Users\\Peterco\\Source\\Repos\\petercowenTrailhead\\LogFileManagement\\LogFileManagement.csproj",
         "projectName": "LogFileManagement",
-        "projectPath": "C:\\Users\\peter\\Source\\Repos\\LogFileManagement\\LogFileManagement\\LogFileManagement.csproj",
-        "packagesPath": "C:\\Users\\peter\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\peter\\Source\\Repos\\LogFileManagement\\LogFileManagement\\obj\\",
+        "projectPath": "C:\\Users\\Peterco\\Source\\Repos\\petercowenTrailhead\\LogFileManagement\\LogFileManagement.csproj",
+        "packagesPath": "C:\\Users\\Peterco\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Peterco\\Source\\Repos\\petercowenTrailhead\\LogFileManagement\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\peter\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Peterco\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -43,6 +46,10 @@
               "version": "[12.0.3, )"
             },
             "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.IO.FileSystem.AccessControl": {
               "target": "Package",
               "version": "[4.7.0, )"
             }
